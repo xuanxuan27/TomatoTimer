@@ -1,10 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>番茄鐘倒數計時器</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
@@ -16,8 +21,16 @@
             </div>
             <button id="startButton">開始</button>
             <button id="resetButton">重置</button>
+            <input type="number" id="customMinutes" placeholder="輸入分鐘">
+            <div class="button-container">
+                <button id="setTimeButton">確認</button>
+            </div>
+        </div>
+        <div id="recordPanel">
+            <h2>紀錄數量</h2>
+            <p id="recordCount">0</p>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script charset="gb2312" type="text/javascript" language="javascript" src="timer_logic.js"></script>
 </body>
 </html>

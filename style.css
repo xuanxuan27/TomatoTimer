@@ -8,9 +8,11 @@ body {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    padding: 30px;
     max-width: 300px;
+    width: 45%; /* 調整番茄鐘的寬度 */
     margin: 0 auto;
+
 }
 
 h1 {
@@ -39,7 +41,47 @@ button:hover {
 
 .container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* 讓子元素之間平均分配空間 */
     align-items: center;
     min-height: 100vh;
+    
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#customMinutes {
+    -moz-appearance: textfield;
+    height: 30px; 
+    font-size: 16px;
+}
+#customMinutes::-webkit-outer-spin-button,
+#customMinutes::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#recordPanel {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 45%; /* 調整紀錄面板的寬度 */
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#recordPanel h2 {
+    color: #333;
+}
+
+#recordCount {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
 }
