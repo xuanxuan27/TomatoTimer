@@ -12,25 +12,45 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="timer">
-            <h1>番茄鐘倒數計時器</h1>
-            <div class="display">
-                <span id="minutes">25</span> 分
-                <span id="seconds">00</span> 秒
-            </div>
-            <button id="startButton">開始</button>
-            <button id="resetButton">重置</button>
-            <input type="number" id="customMinutes" placeholder="輸入分鐘">
-            <div class="button-container">
-                <button id="setTimeButton">確認</button>
-            </div>
+    <div class="timer">
+        <h1>番茄鐘倒數計時器</h1>
+        <div class="display">
+            <span id="minutes">25</span> 分
+            <span id="seconds">00</span> 秒
         </div>
-        <div id="recordPanel">
-            <h2>紀錄數量</h2>
-            <p id="recordCount">0</p>
+        <button id="startButton">開始</button>
+        <button id="resetButton">重置</button>
+    </div>
+    
+    <div class="todoPanel" id="todoPanel">
+        <button>新增TODO</button>
+        <div class="todoBox">
+            <p>Todo 1</p>
+        </div>
+        <div class="todoBox">
+            <p>Todo 2</p>
+        </div>
+        <div class="todoBox">
+            <p>Todo 3</p>
         </div>
     </div>
+    <div class="recordPanel" id="recordPanel">
+        <div class="recordBox" id="workBox">
+            <h3>工作番茄</h3>
+            <p><span id="workTomatoes">0</span> 個</p>
+        </div>
+        
+        <div class="recordBox" id="breakBox">
+            <h3>休息番茄</h3>
+            <p><span id="breakTomatoes">0</span> 個</p>
+        </div>
+        
+        <div class="recordBox" id="otherBox">
+            <h3>其他番茄</h3>
+            <p><span id="otherTomatoes">0</span> 個</p>
+        </div>
+    </div>
+    
     <script charset="gb2312" type="text/javascript" language="javascript" src="timer_logic.js"></script>
 </body>
 </html>

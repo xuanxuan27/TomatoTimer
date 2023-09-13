@@ -1,19 +1,20 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f2f2f2;
+    background-color: #cd5f59;
 }
 
 .timer {
-    background-color: #fff;
+    background-color: #f3bda5;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 30px;
-    max-width: 300px;
-    width: 45%; /* 調整番茄鐘的寬度 */
+    padding: 20px;
+    max-width: 500px;
     margin: 0 auto;
-
+    text-align: center;
+    margin-bottom: 20px; /* 添加底部外邊距 */
 }
+
 
 h1 {
     color: #333;
@@ -27,7 +28,7 @@ h1 {
 button {
     font-size: 18px;
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: #99c6f6;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -64,24 +65,65 @@ button:hover {
     -webkit-appearance: none;
     appearance: none;
 }
+.todoPanel{
+    background-color: #9e6229;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex; /* 使用 Flex 布局 */
+    flex-direction: column; /* 垂直排列 */
+    align-items: center; /* 水平居中對齊 */
+    max-width: 500px; /* 設定最大寬度，根據需要調整 */
+    margin: 0 auto; /* 水平居中 */
+    padding: 20px;
+    text-align: center;
+}
 
-#recordPanel {
+.todoBox {
+    background-color: #fdc2c2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0; /* 增加垂直間距 */
+    width: 80%;
+    text-align: center;
+}
+
+.recordPanel {
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.recordBox {
+    display: inline-block;
+    width: 25%;
+    padding: 10px;
+    margin: 10px;
+    background-color: #fdc2c2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.box h3 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.box p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.tag{
+    
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    width: 45%; /* 調整紀錄面板的寬度 */
-    max-width: 300px;
+    max-width: 100px;
     margin: 0 auto;
     text-align: center;
-}
-
-#recordPanel h2 {
-    color: #333;
-}
-
-#recordCount {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 10px;
+    
 }

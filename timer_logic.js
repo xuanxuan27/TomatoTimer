@@ -3,8 +3,6 @@ const minutesDisplay = document.getElementById("minutes");
 const secondsDisplay = document.getElementById("seconds");
 const startButton = document.getElementById("startButton");
 const resetButton = document.getElementById("resetButton");
-const customMinutesInput = document.getElementById("customMinutes");
-const setTimeButton = document.getElementById("setTimeButton");
 
 // 設定初始計時器時間（25分鐘）
 let minutes = 25;
@@ -15,7 +13,6 @@ let recordCount = 0;
 // 添加事件監聽器
 startButton.addEventListener("click", startTimer);
 resetButton.addEventListener("click", resetTimer);
-setTimeButton.addEventListener("click", setTimer)
 
 // 在計時器結束時，增加紀錄數量
 function addToRecord() {
@@ -62,13 +59,6 @@ function resetTimer() {
     updateDisplay();
     startButton.disabled = false;
     resetButton.disabled = true;
-}
-
-function setTimer() {
-    if (customMinutesInput.value !== "") {
-        minutes = parseInt(customMinutesInput.value);
-        updateDisplay(); // 更新計時器顯示
-    }
 }
 
 
