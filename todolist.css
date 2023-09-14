@@ -1,0 +1,91 @@
+/*代辦事項一覽的box*/
+.horicenter-box {
+    width: 300px;
+    height: 50px;
+    background-color: white;
+    border: 5px solid black;
+    margin: 10px;
+    /*文本水平置中*/
+    text-align: center;
+    /*文本垂直置中*/
+    line-height: 50px;
+    /*box置中*/
+    font-size: 28px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.create-box {
+    width: 300px;
+    height: 50px;
+    background-color: white;
+    border: 5px solid black;
+    margin: 10px;
+    /*文本水平置中*/
+    text-align: center;
+    /*文本垂直置中*/
+    line-height: 50px;
+    /*box置中*/
+    font-size: 28px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*置中標題*/
+.center-text {
+    text-align: center;
+    /* 文本水平置中 */
+    margin-top: 50px;
+}
+
+
+/*建立代辦事項用輸入欄位*/
+.input-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#name-input {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    text-align: center;
+    width: 500px;
+    font-size: 28px;
+}
+
+#tag-input {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    text-align: center;
+    width: 500px;
+    font-size: 28px;
+}
+
+#tomato-input {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    text-align: center;
+    width: 500px;
+    font-size: 28px;
+}
+
+/*按鈕*/
+.button-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.custom-button {
+    background-color: #e6e6fa;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 28px;
+    text-align: center;
+
+}
