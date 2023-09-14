@@ -1,5 +1,4 @@
 
-
 /*click to store new to do list and return to the start scene*/
 function getInputValue() {
     var name = document.getElementById("name-input").value;
