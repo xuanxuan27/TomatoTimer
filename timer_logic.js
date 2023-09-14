@@ -9,7 +9,7 @@ const minusTomatoButton = document.getElementById("minusTomato");
 
 
 // 設定初始計時器時間（25分鐘）
-let minutes = 1;
+let minutes = 25;
 let seconds = 0;
 let timer;
 let recordCount = 0;
@@ -73,7 +73,7 @@ function startTimer() {
 // 重置計時器
 function resetTimer() {
     clearInterval(timer);
-    minutes = 1;
+    minutes = 25;
     seconds = 0;
     updateDisplay();
     startButton.disabled = false;
