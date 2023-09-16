@@ -4,6 +4,7 @@ function getInputValue() {
     var name = document.getElementById("name-input").value;
     var tag = document.getElementById("tag-input").value;
     var tomato = document.getElementById("tomato-input").value;
+    var remainTomato = tomato;
     /*document.getElementById("result").textContent = name + tag + tomato;*/
     var todos = [];
     if (localStorage.getItem('todos') !== null) {
@@ -12,7 +13,8 @@ function getInputValue() {
     var newTodo = {
         name: name,
         tag: tag,
-        tomato: tomato
+        tomato: tomato,
+        remainTomato:remainTomato
     };
     todos.push(newTodo);
     localStorage.setItem('todos', JSON.stringify(todos));
