@@ -1,4 +1,4 @@
-// Àò¨úHTML¤¸¯À
+// ç²å–HTMLå…ƒç´ 
 const minutesDisplay = document.getElementById("minutes");
 const secondsDisplay = document.getElementById("seconds");
 const tomatoNumDisplay = document.getElementById("totalTomato");
@@ -8,26 +8,26 @@ const addTomatoButton = document.getElementById("addTomato");
 const minusTomatoButton = document.getElementById("minusTomato");
 
 
-// ³]©wªì©l­p®É¾¹®É¶¡¡]25¤ÀÄÁ¡^
+// è¨­å®šåˆå§‹è¨ˆæ™‚å™¨æ™‚é–“ï¼ˆ25åˆ†é˜ï¼‰
 let minutes = 25;
 let seconds = 0;
 let timer;
 let recordCount = 0;
 
-// ²K¥[¨Æ¥óºÊÅ¥¾¹
+// æ·»åŠ äº‹ä»¶ç›£è½å™¨
 startButton.addEventListener("click", startTimer);
 resetButton.addEventListener("click", resetTimer);
 addTomatoButton.addEventListener("click", addTimer);
 minusTomatoButton.addEventListener("click", minusTimer);
 
 
-// ¦b­p®É¾¹µ²§ô®É¡A¼W¥[¬ö¿ı¼Æ¶q
+// åœ¨è¨ˆæ™‚å™¨çµæŸæ™‚ï¼Œå¢åŠ ç´€éŒ„æ•¸é‡
 function addToRecord() {
     recordCount++;
     tomatoNumDisplay.textContent = recordCount;
 }
 
-// §ó·s­p®É¾¹Åã¥Ü
+// æ›´æ–°è¨ˆæ™‚å™¨é¡¯ç¤º
 function updateDisplay() {
     minutesDisplay.textContent = minutes.toString().padStart(2, "0");
     secondsDisplay.textContent = seconds.toString().padStart(2, "0");
@@ -44,7 +44,7 @@ function minusTimer(){
     updateDisplay();
 }
 
-// ¶}©l­p®É¾¹
+// é–‹å§‹è¨ˆæ™‚å™¨
 function startTimer() {
     /*if (customMinutesInput.value !== "") {
         minutes = parseInt(customMinutesInput.value);
@@ -54,7 +54,7 @@ function startTimer() {
             clearInterval(timer);
             addToRecord();
             resetTimer();
-            alert("®É¶¡¨ì¡I");
+            alert("æ™‚é–“åˆ°ï¼");
         } else if (seconds === 0) {
             minutes--;
             seconds = 59;
@@ -70,7 +70,7 @@ function startTimer() {
     
 }
 
-// ­«¸m­p®É¾¹
+// é‡ç½®è¨ˆæ™‚å™¨
 function resetTimer() {
     clearInterval(timer);
     minutes = 25;
@@ -80,6 +80,6 @@ function resetTimer() {
     resetButton.disabled = true;
 }
 
-// ªì©l¤Æ­p®É¾¹Åã¥Ü
+// åˆå§‹åŒ–è¨ˆæ™‚å™¨é¡¯ç¤º
 updateDisplay();
 resetButton.disabled = true;

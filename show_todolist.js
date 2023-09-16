@@ -6,8 +6,22 @@ window.onload = function () {
     if (todos && todos.length > 0) {
         todos.forEach(function (todo, index) {
             var div = document.createElement('div');
-            div.textContent = todo.name;
             div.className = 'todoBox';
+
+            var nameDiv = document.createElement('div');
+            nameDiv.textContent = todo.name;
+            
+            var restartButton = document.createElement('button');
+            restartButton.textContent = 'Restart';
+            restartButton.addEventListener('click', function() {
+                // 在這裡處理重啟功能，例如將該待辦事項標記為未完成或重設進度
+                // 你可以在這裡添加你的重啟邏輯
+                alert('重啟功能尚未實現');
+            });
+
+            div.appendChild(nameDiv);
+            div.appendChild(restartButton);
+
             infoBox.appendChild(div);
 
 
