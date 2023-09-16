@@ -1,4 +1,4 @@
-// Àò¨úHTML¤¸¯À
+// ï¿½ï¿½ï¿½HTMLï¿½ï¿½ï¿½ï¿½
 const minutesDisplay = document.getElementById("minutes");
 const secondsDisplay = document.getElementById("seconds");
 const tomatoNumDisplay = document.getElementById("totalTomato");
@@ -6,45 +6,45 @@ const startButton = document.getElementById("startButton");
 const resetButton = document.getElementById("resetButton");
 const addTomatoButton = document.getElementById("addTomato");
 const minusTomatoButton = document.getElementById("minusTomato");
+const timerSound = document.getElementById('timerSound');
 
-
-// ³]©wªì©l­p®É¾¹®É¶¡¡]25¤ÀÄÁ¡^
-let minutes = 25;
+// ï¿½]ï¿½wï¿½ï¿½lï¿½pï¿½É¾ï¿½ï¿½É¶ï¿½ï¿½]25ï¿½ï¿½ï¿½ï¿½ï¿½^
+let minutes = 25;/* */
 let seconds = 0;
 let timer;
 let recordCount = 0;
 
-// ²K¥[¨Æ¥óºÊÅ¥¾¹
+// ï¿½Kï¿½[ï¿½Æ¥ï¿½ï¿½Å¥ï¿½ï¿½
 startButton.addEventListener("click", startTimer);
 resetButton.addEventListener("click", resetTimer);
 addTomatoButton.addEventListener("click", addTimer);
 minusTomatoButton.addEventListener("click", minusTimer);
 
 
-// ¦b­p®É¾¹µ²§ô®É¡A¼W¥[¬ö¿ı¼Æ¶q
+// ï¿½bï¿½pï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¡Aï¿½Wï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶q
 function addToRecord() {
     recordCount++;
     tomatoNumDisplay.textContent = recordCount;
 }
 
-// §ó·s­p®É¾¹Åã¥Ü
+// ï¿½ï¿½sï¿½pï¿½É¾ï¿½ï¿½ï¿½ï¿½
 function updateDisplay() {
     minutesDisplay.textContent = minutes.toString().padStart(2, "0");
     secondsDisplay.textContent = seconds.toString().padStart(2, "0");
 }
 
 function addTimer(){
-    minutes += 25;
+    minutes += 25;/* */
     updateDisplay();
 }
 
 function minusTimer(){
-    if(minutes-25 >=0 ) minutes -= 25;
+    if(minutes-25 >=0 ) minutes -= 25;/* */
     else minutes = 0;
     updateDisplay();
 }
 
-// ¶}©l­p®É¾¹
+// ï¿½}ï¿½lï¿½pï¿½É¾ï¿½
 function startTimer() {
     /*if (customMinutesInput.value !== "") {
         minutes = parseInt(customMinutesInput.value);
@@ -54,7 +54,8 @@ function startTimer() {
             clearInterval(timer);
             addToRecord();
             resetTimer();
-            alert("®É¶¡¨ì¡I");
+            playTimerSound(); // è¨ˆæ™‚å™¨åˆ°é”0ï¼Œæ’­æ”¾æç¤ºéŸ³
+            alert("ï¿½É¶ï¿½ï¿½ï¿½I");
         } else if (seconds === 0) {
             minutes--;
             seconds = 59;
@@ -70,16 +71,20 @@ function startTimer() {
     
 }
 
-// ­«¸m­p®É¾¹
+// ï¿½ï¿½ï¿½mï¿½pï¿½É¾ï¿½
 function resetTimer() {
     clearInterval(timer);
-    minutes = 25;
+    minutes = 25;/* */
     seconds = 0;
     updateDisplay();
     startButton.disabled = false;
     resetButton.disabled = true;
 }
 
-// ªì©l¤Æ­p®É¾¹Åã¥Ü
+function playTimerSound() {
+    timerSound.play();
+}
+
+// ï¿½ï¿½lï¿½Æ­pï¿½É¾ï¿½ï¿½ï¿½ï¿½
 updateDisplay();
 resetButton.disabled = true;
