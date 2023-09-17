@@ -107,20 +107,7 @@ function startTimer(todo, div) {
             todo.remainTomato--;
             updateTodoDisplay(todo, div);
         }
-        switch (todo.tag) {
-            case "工作":
-                workRecordCount++;
-                workTomatosNumDisplay.textContent = workRecordCount;
-                break;
-            case "休息":
-                breakRecordCount++;
-                breakTomatoesNumDisplay.textContent = breakRecordCount;
-                break;
-            default:
-                otherRecordCount++;
-                otherTomatoesNumDisplay.textContent = otherRecordCount;
-                break;
-        }
+        addToRecordWithTag(todo.tag);
         addToRecord();
     }, interval);
 
@@ -165,6 +152,24 @@ function todosStateClean() {
         selectedArray.forEach(selected => {
             selected.className = "todoBox";
         });
+    }
+}
+
+// 維尼:用來以分類紀錄總番茄鐘數
+function addToRecordWithTag(tag) {
+    switch (tag) {
+        case "工作":
+            workRecordCount++;
+            workTomatosNumDisplay.textContent = workRecordCount;
+            break;
+        case "休息":
+            breakRecordCount++;
+            breakTomatoesNumDisplay.textContent = breakRecordCount;
+            break;
+        default:
+            otherRecordCount++;
+            otherTomatoesNumDisplay.textContent = otherRecordCount;
+            break;
     }
 }
 

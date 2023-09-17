@@ -81,6 +81,7 @@ function startTimer() {
         if (minutes === 0 && seconds === 0) {
             clearInterval(timer);
             addToRecord();
+            addToRecordWithTag("");
             resetTimer();
             /*playTimerSound();*/ // 計時器到達0，播放提示音
             tomatoAnimation();
