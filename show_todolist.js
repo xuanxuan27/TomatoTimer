@@ -25,6 +25,7 @@ window.onload = function () {
             restartButton.textContent = 'Restart';
             restartButton.addEventListener('click', function () {
                 // 重新啟動番茄鐘
+                div.className = "todoBox"
                 todo.remainTomato = todo.tomato;
                 todo.isTimerRunning = false;
                 updateTodoDisplay(todo, div);
