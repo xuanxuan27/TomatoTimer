@@ -16,7 +16,7 @@ const musicControlButton = document.getElementById('musicControl');
 const musicPlayer = new Audio('bgm.mp3'); 
 
 // 設定初始計時器時間（25分鐘）
-let minutes = 1;
+let minutes = 25;
 let seconds = 0;
 let timer;
 // records
