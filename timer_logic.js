@@ -2,6 +2,9 @@
 const minutesDisplay = document.getElementById("minutes");
 const secondsDisplay = document.getElementById("seconds");
 const tomatoNumDisplay = document.getElementById("totalTomato");
+const workTomatosNumDisplay = document.getElementById("workTomatoes");
+const breakTomatoesNumDisplay = document.getElementById("breakTomatoes");
+const otherTomatoesNumDisplay = document.getElementById("otherTomatoes");
 const startButton = document.getElementById("startButton");
 const resetButton = document.getElementById("resetButton");
 const addTomatoButton = document.getElementById("addTomato");
@@ -13,10 +16,15 @@ const musicControlButton = document.getElementById('musicControl');
 const musicPlayer = new Audio('bgm.mp3'); 
 
 // 設定初始計時器時間（25分鐘）
-let minutes = 25;
+let minutes = 1;
 let seconds = 0;
 let timer;
+// records
 let recordCount = 0;
+let workRecordCount = 0;
+let breakRecordCount = 0;
+let otherRecordCount = 0;
+// music play on/off
 let isMusicPlaying = false;
 
 // 添加事件監聽器

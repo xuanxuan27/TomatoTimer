@@ -12,7 +12,7 @@ body {
     max-width: 500px;
     margin: 0 auto;
     text-align: center;
-    margin-bottom: 20px; /* ²K¥[©³³¡¥~Ãä¶Z */
+    margin-bottom: 20px; /* ï¿½Kï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½~ï¿½ï¿½Z */
 }
 
 
@@ -42,7 +42,7 @@ button:hover {
 
 .container {
     display: flex;
-    justify-content: space-between; /* Åı¤l¤¸¯À¤§¶¡¥­§¡¤À°tªÅ¶¡ */
+    justify-content: space-between; /* ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½Å¶ï¿½ */
     align-items: center;
     min-height: 100vh;
     
@@ -69,11 +69,11 @@ button:hover {
     background-color: #513e27;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    display: flex; /* ¨Ï¥Î Flex ¥¬§½ */
-    flex-direction: column; /* ««ª½±Æ¦C */
-    align-items: center; /* ¤ô¥­©~¤¤¹ï»ô */
-    max-width: 500px; /* ³]©w³Ì¤j¼e«×¡A®Ú¾Ú»İ­n½Õ¾ã */
-    margin: 0 auto; /* ¤ô¥­©~¤¤ */
+    display: flex; /* ï¿½Ï¥ï¿½ Flex ï¿½ï¿½ï¿½ï¿½ */
+    flex-direction: column; /* ï¿½ï¿½ï¿½ï¿½ï¿½Æ¦C */
+    align-items: center; /* ï¿½ï¿½ï¿½ï¿½ï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    max-width: 500px; /* ï¿½]ï¿½wï¿½Ì¤jï¿½eï¿½×¡Aï¿½Ú¾Ú»İ­nï¿½Õ¾ï¿½ */
+    margin: 0 auto; /* ï¿½ï¿½ï¿½ï¿½ï¿½~ï¿½ï¿½ */
     padding: 20px;
     text-align: center;
 }
@@ -83,7 +83,27 @@ button:hover {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    margin: 10px 0; /* ¼W¥[««ª½¶¡¶Z */
+    margin: 10px 0; /* ï¿½Wï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Z */
+    width: 80%;
+    text-align: center;
+}
+/* ç¶­å°¼:é¡¯ç¤ºdefaule/ selectd/ doneå·®ç•°è€Œåšçš„style */
+.todoBoxSelected {
+    background-color: #ffe3d2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0; /* ï¿½Wï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Z */
+    width: 80%;
+    text-align: center;
+}
+
+.todoBoxDone {
+    background-color: #7b665b;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0; /* ï¿½Wï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Z */
     width: 80%;
     text-align: center;
 }

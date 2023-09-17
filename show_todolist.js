@@ -19,7 +19,8 @@ window.onload = function () {
 
             var remainDiv = document.createElement('div');
             remainDiv.textContent = '剩餘番茄鐘數：' + todo.remainTomato;
-
+            remainDiv.setAttribute("class", "remain-tomato")
+            // 維尼:為了使updateTodoDisplay能正常運作而加上的class
             var restartButton = document.createElement('button');
             restartButton.textContent = 'Restart';
             restartButton.addEventListener('click', function () {
@@ -34,7 +35,9 @@ window.onload = function () {
             startTimerButton.addEventListener('click', function () {
                 if (!todo.isTimerRunning) {
                     // 開始計時器
-                    startTimer(todo);
+                    todosStateClean();
+                    div.className = "todoBoxSelected";
+                    startTimer(todo, div);
                     todo.isTimerRunning = true;
                     updateTodoDisplay(todo, div);
                 }
@@ -59,7 +62,7 @@ window.onload = function () {
 
             // 如果番茄鐘正在運行，則啟動計時器
             if (todo.isTimerRunning) {
-                startTimer(todo);
+                startTimer(todo, div);
             }
         });
     } else {
@@ -78,25 +81,47 @@ window.onload = function () {
     infoBox.appendChild(clearAllButton);
 };
 
-function startTimer(todo) {
+/**
+ * 維尼:加上class對應的番茄數增長，將番茄鐘增長改為一次interval增加一次
+*/
+function startTimer(todo, div) {
+    interval = (minutes*60 + seconds)*1000
+    console.log(interval);
     clearInterval(todo.timer);
     todo.remainTomato--; // 開始倒數，減少剩餘番茄鐘數
     updateTodoDisplay(todo, div);
 
     todo.timer = setInterval(function () {
+        // console.log(todo);
         if (todo.remainTomato === 0) {
             clearInterval(todo.timer);
             // 當番茄鐘倒數結束時，將 isTimerRunning 設置為 false
             todo.isTimerRunning = false;
             updateTodoDisplay(todo, div);
-            addToRecord();
+            // addToRecord();
             resetTimer();
+            div.className = "todoBoxDone";
             alert("時間到！");
         } else {
             todo.remainTomato--;
             updateTodoDisplay(todo, div);
         }
-    }, 1000);
+        switch (todo.tag) {
+            case "工作":
+                workRecordCount++;
+                workTomatosNumDisplay.textContent = workRecordCount;
+                break;
+            case "休息":
+                breakRecordCount++;
+                breakTomatoesNumDisplay.textContent = breakRecordCount;
+                break;
+            default:
+                otherRecordCount++;
+                otherTomatoesNumDisplay.textContent = otherRecordCount;
+                break;
+        }
+        addToRecord();
+    }, interval);
 
     startButton.disabled = true;
     resetButton.disabled = false;
@@ -127,6 +152,19 @@ function clearAllTodos() {
 /*when click add new to do button then switch to the add scene*/
 function AddTodo_button() {
     window.location.href = "create_thing.html";
+}
+/**
+ * 維尼:為了產生顏色差別in defaule/ selectd/ done以做的clean state
+ */
+function todosStateClean() {
+    var todoBoxSelected = document.getElementsByClassName("todoBoxSelected"); 
+    let selectedArray = Array.from(todoBoxSelected);
+    console.log(selectedArray)
+    if(selectedArray.length != 0){
+        selectedArray.forEach(selected => {
+            selected.className = "todoBox";
+        });
+    }
 }
 
 
