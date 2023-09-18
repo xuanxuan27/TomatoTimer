@@ -179,8 +179,6 @@ function addToRecordWithTag(tag) {
             breakRecordCount++;
             breakTomatoesNumDisplay.textContent = breakRecordCount;
             break;
-        case "-1":
-            break;
         default:
             otherRecordCount++;
             otherTomatoesNumDisplay.textContent = otherRecordCount;

@@ -118,9 +118,9 @@ function startTimer() {
 
 function startTodoTimer(recount = false) {
     console.log("startTodoTimer");
-    musicPlayer.play(); // 開始音樂播放
-    isMusicPlaying = true;
-    musicControlButton.textContent = '停止音樂'; // 更新音樂開關按鈕文本
+    // musicPlayer.play(); // 開始音樂播放
+    // isMusicPlaying = true;
+    // musicControlButton.textContent = '停止音樂'; // 更新音樂開關按鈕文本
     /*if (customMinutesInput.value !== "") {
         minutes = parseInt(customMinutesInput.value);
     }*/
