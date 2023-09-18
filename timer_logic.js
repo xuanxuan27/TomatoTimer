@@ -81,9 +81,14 @@ function minusTimer(){
 
 // 開始計時器
 function startTimer() {
+    
+    tomatoImage.src = "image/tomato_original.png";
+    /*
     musicPlayer.play(); // 開始音樂播放
     isMusicPlaying = true;
     musicControlButton.textContent = '停止音樂'; // 更新音樂開關按鈕文本
+    */
+
     /*if (customMinutesInput.value !== "") {
         minutes = parseInt(customMinutesInput.value);
     }*/
@@ -150,6 +155,7 @@ function startTodoTimer(recount = false) {
 
 // 重置計時器
 function resetTimer() {
+    tomatoImage.src = "image/tomato_original.png";
     musicPlayer.pause(); // 停止音樂播放
     isMusicPlaying = false;
     musicControlButton.textContent = '播放開關'; // 更新音樂開關按鈕文本
