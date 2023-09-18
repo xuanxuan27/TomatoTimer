@@ -111,7 +111,7 @@ function startTimer() {
     
 }
 
-function startTodoTimer() {
+function startTodoTimer(recount = false) {
     console.log("startTodoTimer");
     musicPlayer.play(); // 開始音樂播放
     isMusicPlaying = true;
@@ -119,6 +119,17 @@ function startTodoTimer() {
     /*if (customMinutesInput.value !== "") {
         minutes = parseInt(customMinutesInput.value);
     }*/
+    if(recount === true){
+        clearInterval(timer);
+        resetTimer();
+        if(seconds === 0) {
+            minutes--;
+            seconds = 59;
+        }else{
+            seconds--;
+        }
+        updateDisplay();
+    }
     timer = setInterval(function () {
         if (minutes === 0 && seconds === 0) {
             console.log("Interval cleaned");

@@ -118,7 +118,7 @@ function startTodoCount(todo, div) {
             // startTimer("-1");
             todo.remainTomato--;
             updateTodoDisplay(todo, div);
-            startTodoCount();
+            startTodoTimer(recordCount = true);
         }
         addToRecordWithTag(todo.tag);
         addToRecord();
