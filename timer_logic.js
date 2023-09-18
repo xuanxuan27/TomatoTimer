@@ -16,8 +16,10 @@ const musicControlButton = document.getElementById('musicControl');
 const musicPlayer = new Audio('bgm.mp3'); 
 
 // 設定初始計時器時間（25分鐘）
-let minutes = 25;
-let seconds = 0;
+let minutes = 0;
+let seconds = 5;
+let setMinutes = minutes;
+let setSecond = seconds;
 let timer;
 // records
 let recordCount = 0;
@@ -71,6 +73,7 @@ function minusTimer(){
 
 // 開始計時器
 function startTimer() {
+    console.log("startTime called ith tag: "+tag);
     musicPlayer.play(); // 開始音樂播放
     isMusicPlaying = true;
     musicControlButton.textContent = '停止音樂'; // 更新音樂開關按鈕文本
@@ -79,9 +82,10 @@ function startTimer() {
     }*/
     timer = setInterval(function () {
         if (minutes === 0 && seconds === 0) {
+            console.log("Interval cleaned");
             clearInterval(timer);
             addToRecord();
-            addToRecordWithTag("");
+            addToRecordWithTag();
             resetTimer();
             /*playTimerSound();*/ // 計時器到達0，播放提示音
             tomatoAnimation();
@@ -100,14 +104,40 @@ function startTimer() {
     
 }
 
+function startTodoTimer() {
+    console.log("startTodoTimer");
+    musicPlayer.play(); // 開始音樂播放
+    isMusicPlaying = true;
+    musicControlButton.textContent = '停止音樂'; // 更新音樂開關按鈕文本
+    /*if (customMinutesInput.value !== "") {
+        minutes = parseInt(customMinutesInput.value);
+    }*/
+    timer = setInterval(function () {
+        if (minutes === 0 && seconds === 0) {
+            console.log("Interval cleaned");
+            clearInterval(timer);
+            resetTimer();
+        } else if (seconds === 0) {
+            minutes--;
+            seconds = 59;
+        } else {
+            seconds--;
+        }
+        updateDisplay();
+    }, 1000);
+    
+    startButton.disabled = true;
+    resetButton.disabled = false;
+}
+
 // 重置計時器
 function resetTimer() {
     musicPlayer.pause(); // 停止音樂播放
     isMusicPlaying = false;
     musicControlButton.textContent = '播放開關'; // 更新音樂開關按鈕文本
     clearInterval(timer);
-    minutes = 25;/* */
-    seconds = 0;
+    minutes = setMinutes;/* 維尼:back to original interval */
+    seconds = setSecond;
     updateDisplay();
     startButton.disabled = false;
     resetButton.disabled = true;

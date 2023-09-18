@@ -34,11 +34,18 @@ window.onload = function () {
             var startTimerButton = document.createElement('button');
             startTimerButton.textContent = 'Start Timer';
             startTimerButton.addEventListener('click', function () {
-                if (!todo.isTimerRunning) {
+                if(todo.remainTomato === 0){
+                    alert("此事項已完成，若需再度計時，請restart!");
+                    return;
+                }else{
+                    console.log("還剩餘:" + todo.remainTomato);
+                }
+                if (!todo.isTimerRunning){
                     // 開始計時器
                     todosStateClean();
                     div.className = "todoBoxSelected";
-                    startTimer(todo, div);
+                    startTodoTimer();
+                    startTodoCount(todo, div);
                     todo.isTimerRunning = true;
                     updateTodoDisplay(todo, div);
                 }
@@ -63,7 +70,7 @@ window.onload = function () {
 
             // 如果番茄鐘正在運行，則啟動計時器
             if (todo.isTimerRunning) {
-                startTimer(todo, div);
+                startTodoCount(todo, div);
             }
         });
     } else {
@@ -85,15 +92,18 @@ window.onload = function () {
 /**
  * 維尼:加上class對應的番茄數增長，將番茄鐘增長改為一次interval增加一次
 */
-function startTimer(todo, div) {
-    interval = (minutes*60 + seconds)*1000
-    console.log(interval);
+function startTodoCount(todo, div) {
+    interval = (setMinutes*60 + setSecond)*1000
+    if(interval == 0){
+        alert("番茄鐘時間錯誤，時間需大於0秒");
+        return;
+    }
     clearInterval(todo.timer);
     todo.remainTomato--; // 開始倒數，減少剩餘番茄鐘數
     updateTodoDisplay(todo, div);
 
     todo.timer = setInterval(function () {
-        // console.log(todo);
+        console.log(todo);
         if (todo.remainTomato === 0) {
             clearInterval(todo.timer);
             // 當番茄鐘倒數結束時，將 isTimerRunning 設置為 false
@@ -102,10 +112,13 @@ function startTimer(todo, div) {
             // addToRecord();
             resetTimer();
             div.className = "todoBoxDone";
+            tomatoAnimation();
             alert("時間到！");
         } else {
+            // startTimer("-1");
             todo.remainTomato--;
             updateTodoDisplay(todo, div);
+            startTodoCount();
         }
         addToRecordWithTag(todo.tag);
         addToRecord();
@@ -165,6 +178,8 @@ function addToRecordWithTag(tag) {
         case "休息":
             breakRecordCount++;
             breakTomatoesNumDisplay.textContent = breakRecordCount;
+            break;
+        case "-1":
             break;
         default:
             otherRecordCount++;
