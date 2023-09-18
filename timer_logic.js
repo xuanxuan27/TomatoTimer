@@ -26,6 +26,8 @@ let breakRecordCount = 0;
 let otherRecordCount = 0;
 // music play on/off
 let isMusicPlaying = false;
+// 設置音樂的音量（範圍：0（無聲）到1（最大音量））
+musicPlayer.volume = 0.1;
 
 // 添加事件監聽器
 startButton.addEventListener("click", startTimer);
@@ -73,11 +75,11 @@ function minusTimer(){
 function startTimer() {
     
     tomatoImage.src = "image/tomato_original.png";
-    /*
+    
     musicPlayer.play(); // 開始音樂播放
     isMusicPlaying = true;
     musicControlButton.textContent = '停止音樂'; // 更新音樂開關按鈕文本
-    */
+    
 
     /*if (customMinutesInput.value !== "") {
         minutes = parseInt(customMinutesInput.value);
