@@ -62,18 +62,25 @@ function updateDisplay() {
 
 function addTimer(){
     minutes += 25;/* */
+    setMinutes += 25;
     updateDisplay();
 }
 
 function minusTimer(){
-    if(minutes-25 >=0 ) minutes -= 25;/* */
-    else minutes = 0;
+    if(minutes-25 >=0 ) {
+        minutes -= 25;/* */
+        setMinutes -= 25
+    }else {
+        minutes = 0;
+        if(setMinutes < 25){
+            setMinutes = 0;
+        }
+    }
     updateDisplay();
 }
 
 // 開始計時器
 function startTimer() {
-    console.log("startTime called ith tag: "+tag);
     musicPlayer.play(); // 開始音樂播放
     isMusicPlaying = true;
     musicControlButton.textContent = '停止音樂'; // 更新音樂開關按鈕文本
