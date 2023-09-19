@@ -127,25 +127,19 @@ function startTodoTimer(recount = false) {
     if(recount === true){
         clearInterval(timer);
         resetTimer();
-        if(seconds === 0) {
-            minutes--;
-            seconds = 59;
-        }else{
-            seconds--;
-        }
-        updateDisplay();
     }
     timer = setInterval(function () {
         if (minutes === 0 && seconds === 0) {
-            console.log("Interval cleaned");
             clearInterval(timer);
             resetTimer();
+            tomatoAnimation();
         } else if (seconds === 0) {
             minutes--;
             seconds = 59;
         } else {
             seconds--;
         }
+        // console.log(minutes+" minutes "+seconds+" seconds");
         updateDisplay();
     }, 1000);
     

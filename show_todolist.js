@@ -44,7 +44,7 @@ window.onload = function () {
                     // 開始計時器
                     todosStateClean();
                     div.className = "todoBoxSelected";
-                    startTodoTimer();
+                    startTodoTimer(recount = false);
                     startTodoCount(todo, div);
                     todo.isTimerRunning = true;
                     updateTodoDisplay(todo, div);
@@ -108,6 +108,7 @@ function startTodoCount(todo, div) {
             clearInterval(todo.timer);
             // 當番茄鐘倒數結束時，將 isTimerRunning 設置為 false
             todo.isTimerRunning = false;
+            seconds--;
             updateTodoDisplay(todo, div);
             // addToRecord();
             resetTimer();
@@ -116,9 +117,9 @@ function startTodoCount(todo, div) {
             alert("時間到！");
         } else {
             // startTimer("-1");
+            startTodoTimer(recount = true);
             todo.remainTomato--;
             updateTodoDisplay(todo, div);
-            startTodoTimer(recordCount = true);
         }
         addToRecordWithTag(todo.tag);
         addToRecord();
