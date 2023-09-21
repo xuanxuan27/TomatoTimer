@@ -27,6 +27,8 @@ window.onload = function () {
                 // 重新啟動番茄鐘
                 div.className = "todoBox"
                 todo.remainTomato = todo.tomato;
+                clearInterval(timer);
+                resetTimer();
                 isTimerRunning = false;
                 updateTodoDisplay(todo, div);
             });
