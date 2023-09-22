@@ -174,13 +174,13 @@ function todosStateClean() {
 // 維尼:用來以分類紀錄總番茄鐘數
 function addToRecordWithTag(tag) {
     switch (tag) {
-        case "工作":
-            workRecordCount++;
-            workTomatosNumDisplay.textContent = workRecordCount;
+        case "讀書":
+            studyRecordCount++;
+            studyTomatosNumDisplay.textContent = studyRecordCount;
             break;
-        case "休息":
-            breakRecordCount++;
-            breakTomatoesNumDisplay.textContent = breakRecordCount;
+        case "運動":
+            exerciseRecordCount++;
+            exerciseTomatoesNumDisplay.textContent = exerciseRecordCount;
             break;
         default:
             otherRecordCount++;

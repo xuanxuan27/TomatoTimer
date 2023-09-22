@@ -3,8 +3,8 @@ const title = document.getElementById("title");
 const minutesDisplay = document.getElementById("minutes");
 const secondsDisplay = document.getElementById("seconds");
 const tomatoNumDisplay = document.getElementById("totalTomato");
-const workTomatosNumDisplay = document.getElementById("workTomatoes");
-const breakTomatoesNumDisplay = document.getElementById("breakTomatoes");
+const studyTomatosNumDisplay = document.getElementById("studyTomatoes");
+const exerciseTomatoesNumDisplay = document.getElementById("exerciseTomatoes");
 const otherTomatoesNumDisplay = document.getElementById("otherTomatoes");
 const startButton = document.getElementById("startButton");
 const resetButton = document.getElementById("resetButton");
@@ -30,8 +30,8 @@ let pomodoroCount = 0; // 番茄數量計數
 
 // records
 let recordCount = 0;
-let workRecordCount = 0;
-let breakRecordCount = 0;
+let studyRecordCount = 0;
+let exerciseRecordCount = 0;
 let otherRecordCount = 0;
 
 // 事件 flag
