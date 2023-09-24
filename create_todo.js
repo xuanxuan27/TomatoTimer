@@ -6,19 +6,35 @@ function getInputValue() {
     var tomato = document.getElementById("tomato-input").value;
     var remainTomato = tomato;
     /*document.getElementById("result").textContent = name + tag + tomato;*/
-    var todos = [];
-    if (localStorage.getItem('todos') !== null) {
-        todos = JSON.parse(localStorage.getItem('todos'));
+    
+    // 檢查各項的值是否為空
+    if (name.trim() === "" || tag.trim() === "" || tomato.trim() === "") {
+        // 顯示警告
+        alert("請填寫所有字段。");
+        return;
     }
-    var newTodo = {
-        name: name,
-        tag: tag,
-        tomato: tomato,
-        remainTomato:remainTomato
-    };
-    todos.push(newTodo);
-    localStorage.setItem('todos', JSON.stringify(todos));
-    window.location.href = "TomatoTimer.html";
+    
+    // 檢查番茄鐘數是否為有效數字且大於0
+    if (!isNaN(tomato) && parseInt(tomato) > 0) {
+        var remainTomato = tomato;
+        
+        var todos = [];
+        if (localStorage.getItem('todos') !== null) {
+            todos = JSON.parse(localStorage.getItem('todos'));
+        }
+        var newTodo = {
+            name: name,
+            tag: tag,
+            tomato: tomato,
+            remainTomato:remainTomato
+        };
+        todos.push(newTodo);
+        localStorage.setItem('todos', JSON.stringify(todos));
+        window.location.href = "TomatoTimer.html";
+    } else {
+        // 显示警告
+        alert("番茄鐘數必須是大於0的數字。");
+    }
 }
 
 

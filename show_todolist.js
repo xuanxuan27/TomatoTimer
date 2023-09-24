@@ -27,7 +27,9 @@ window.onload = function () {
                 // 重新啟動番茄鐘
                 div.className = "todoBox"
                 todo.remainTomato = todo.tomato;
-                todo.isTimerRunning = false;
+                clearInterval(timer);
+                resetTimer();
+                isTimerRunning = false;
                 updateTodoDisplay(todo, div);
             });
 
@@ -40,13 +42,14 @@ window.onload = function () {
                 }else{
                     console.log("還剩餘:" + todo.remainTomato);
                 }
-                if (!todo.isTimerRunning){
+                if (!isTimerRunning){
+                    console.log("isTimerRunning?: ", isTimerRunning);
                     // 開始計時器
                     todosStateClean();
                     div.className = "todoBoxSelected";
-                    startTodoTimer();
+                    startTodoTimer(recount = false);
                     startTodoCount(todo, div);
-                    todo.isTimerRunning = true;
+                    isTimerRunning = true;
                     updateTodoDisplay(todo, div);
                 }
             });
@@ -69,7 +72,7 @@ window.onload = function () {
             infoBox.appendChild(div);
 
             // 如果番茄鐘正在運行，則啟動計時器
-            if (todo.isTimerRunning) {
+            if (isTimerRunning) {
                 startTodoCount(todo, div);
             }
         });
@@ -103,23 +106,23 @@ function startTodoCount(todo, div) {
     updateTodoDisplay(todo, div);
 
     todo.timer = setInterval(function () {
-        console.log(todo);
+        console.log(todo.remainTomato);
         if (todo.remainTomato === 0) {
             clearInterval(todo.timer);
             // 當番茄鐘倒數結束時，將 isTimerRunning 設置為 false
-            todo.isTimerRunning = false;
-            updateTodoDisplay(todo, div);
+            isTimerRunning = false;
             // addToRecord();
-            resetTimer();
             div.className = "todoBoxDone";
+            resetTimer();
             tomatoAnimation();
-            alert("時間到！");
+            //alert("時間到！");
+            
         } else {
-            // startTimer("-1");
             todo.remainTomato--;
-            updateTodoDisplay(todo, div);
-            startTodoTimer(recordCount = true);
+            startTodoTimer(recount = true);
         }
+        
+        updateTodoDisplay(todo, div);
         addToRecordWithTag(todo.tag);
         addToRecord();
     }, interval);
@@ -171,13 +174,13 @@ function todosStateClean() {
 // 維尼:用來以分類紀錄總番茄鐘數
 function addToRecordWithTag(tag) {
     switch (tag) {
-        case "工作":
-            workRecordCount++;
-            workTomatosNumDisplay.textContent = workRecordCount;
+        case "讀書":
+            studyRecordCount++;
+            studyTomatosNumDisplay.textContent = studyRecordCount;
             break;
-        case "休息":
-            breakRecordCount++;
-            breakTomatoesNumDisplay.textContent = breakRecordCount;
+        case "運動":
+            exerciseRecordCount++;
+            exerciseTomatoesNumDisplay.textContent = exerciseRecordCount;
             break;
         default:
             otherRecordCount++;

@@ -1,9 +1,10 @@
 // 獲取HTML元素
+const title = document.getElementById("title");
 const minutesDisplay = document.getElementById("minutes");
 const secondsDisplay = document.getElementById("seconds");
 const tomatoNumDisplay = document.getElementById("totalTomato");
-const workTomatosNumDisplay = document.getElementById("workTomatoes");
-const breakTomatoesNumDisplay = document.getElementById("breakTomatoes");
+const studyTomatosNumDisplay = document.getElementById("studyTomatoes");
+const exerciseTomatoesNumDisplay = document.getElementById("exerciseTomatoes");
 const otherTomatoesNumDisplay = document.getElementById("otherTomatoes");
 const startButton = document.getElementById("startButton");
 const resetButton = document.getElementById("resetButton");
@@ -16,20 +17,29 @@ const musicControlButton = document.getElementById('musicControl');
 const musicPlayer = new Audio('bgm.mp3'); 
 
 // 設定初始計時器時間（25分鐘）
-let minutes = 0;
-let seconds = 5;
+let minutes = 25;
+let seconds = 0;
 let setMinutes = minutes;
 let setSecond = seconds;
 let timer;
+
+let restTime = 5;  // 休息時間（以分鐘為單位）
+let longRestTime = 15; // 第四次休息的長休息時間（以分鐘為單位）
+let pomodoroCount = 0; // 番茄數量計數
+
+
 // records
 let recordCount = 0;
-let workRecordCount = 0;
-let breakRecordCount = 0;
+let studyRecordCount = 0;
+let exerciseRecordCount = 0;
 let otherRecordCount = 0;
-// music play on/off
-let isMusicPlaying = false;
-// 設置音樂的音量（範圍：0（無聲）到1（最大音量））
-musicPlayer.volume = 0.1;
+
+// 事件 flag
+let isMusicPlaying = false; // music play on/off
+musicPlayer.volume = 0.3;
+let isTimerRunning = false;
+let breakSection = false;
+
 
 // 添加事件監聽器
 startButton.addEventListener("click", startTimer);
@@ -78,28 +88,22 @@ function minusTimer(){
             setMinutes = 0;
         }
     }
+    if(minutes==0 && seconds==0)
+        startButton.disabled = true;
     updateDisplay();
 }
 
 // 開始計時器
 function startTimer() {
-    
+    isTimerRunning = true;
+    console.log("isTimerRunning?: ", isTimerRunning);
     tomatoImage.src = "image/tomato_original.png";
-    
-    musicPlayer.play(); // 開始音樂播放
-    isMusicPlaying = true;
-    musicControlButton.textContent = '停止音樂'; // 更新音樂開關按鈕文本
-    
 
-    /*if (customMinutesInput.value !== "") {
-        minutes = parseInt(customMinutesInput.value);
-    }*/
     timer = setInterval(function () {
         if (minutes === 0 && seconds === 0) {
             console.log("Interval cleaned");
             clearInterval(timer);
-            addToRecord();
-            addToRecordWithTag();
+            isTimerRunning = false;
             resetTimer();
             /*playTimerSound();*/ // 計時器到達0，播放提示音
             tomatoAnimation();
@@ -119,35 +123,24 @@ function startTimer() {
 }
 
 function startTodoTimer(recount = false) {
+    tomatoImage.src = "image/tomato_original.png";
     console.log("startTodoTimer");
-    // musicPlayer.play(); // 開始音樂播放
-    // isMusicPlaying = true;
-    // musicControlButton.textContent = '停止音樂'; // 更新音樂開關按鈕文本
-    /*if (customMinutesInput.value !== "") {
-        minutes = parseInt(customMinutesInput.value);
-    }*/
     if(recount === true){
         clearInterval(timer);
         resetTimer();
-        if(seconds === 0) {
-            minutes--;
-            seconds = 59;
-        }else{
-            seconds--;
-        }
-        updateDisplay();
     }
     timer = setInterval(function () {
         if (minutes === 0 && seconds === 0) {
-            console.log("Interval cleaned");
             clearInterval(timer);
             resetTimer();
+            tomatoAnimation();
         } else if (seconds === 0) {
             minutes--;
             seconds = 59;
         } else {
             seconds--;
         }
+        // console.log(minutes+" minutes "+seconds+" seconds");
         updateDisplay();
     }, 1000);
     
@@ -157,13 +150,61 @@ function startTodoTimer(recount = false) {
 
 // 重置計時器
 function resetTimer() {
-    tomatoImage.src = "image/tomato_original.png";
-    musicPlayer.pause(); // 停止音樂播放
-    isMusicPlaying = false;
-    musicControlButton.textContent = '播放開關'; // 更新音樂開關按鈕文本
     clearInterval(timer);
-    minutes = setMinutes;/* 維尼:back to original interval */
-    seconds = setSecond;
+    // 計時結束後的自動 reset
+    if(isTimerRunning==false){
+        if(breakSection == true){
+            title.textContent = "番茄鐘倒數計時器";
+            pomodoroCount++; // 增加番茄計數
+            minutes = setMinutes;/* 維尼:back to original interval */
+            seconds = setSecond;
+            breakSection = false;
+        }
+        else{
+            title.textContent = "休息時間";
+            addToRecord();
+            addToRecordWithTag();
+            if (pomodoroCount === 3) {
+                // 第四次休息，設置長休息時間
+                minutes = longRestTime;
+                seconds = setSecond;
+                // seconds = longRestTime; // 測試用
+                pomodoroCount = 0; // 重置番茄計數
+            } else {
+                // 其他情況，開始休息計時
+                minutes = restTime;
+                seconds = setSecond;
+                // seconds = restTime; // 測試用
+            }
+            breakSection = true;
+        }
+    }
+    // 計時未結束時使用者按 reset
+    else{
+        if(breakSection == false){
+            title.textContent = "番茄鐘倒數計時器";
+            minutes = setMinutes;/* 維尼:back to original interval */
+            seconds = setSecond;
+            breakSection = false;
+        }
+        else{
+            title.textContent = "休息時間";
+            if (pomodoroCount === 3) {
+                // 第四次休息，設置長休息時間
+                minutes = longRestTime;
+                seconds = setSecond;
+                // seconds = longRestTime; // 測試用
+                pomodoroCount = 0; // 重置番茄計數
+            } else {
+                // 其他情況，開始休息計時
+                minutes = restTime;
+                seconds = setSecond;
+                // seconds = restTime; // 測試用
+            }
+            breakSection = true;
+        }
+    }
+    
     updateDisplay();
     startButton.disabled = false;
     resetButton.disabled = true;
@@ -176,9 +217,12 @@ function resetTimer() {
 
 // 蕃茄爆炸動畫
 function tomatoAnimation() {
+    musicPlayer.pause(); // 停止音樂播放
+    isMusicPlaying = false;
+    musicControlButton.textContent = '播放音樂'; // 更新音樂開關按鈕文本
+
     tomatoImage.src = "image/tomato_animation_2.gif";
     tomatoSound.play();
-    /*alert("時間到！");*/
 }
 
 function updateTimer() {
