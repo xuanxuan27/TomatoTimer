@@ -20,36 +20,41 @@ window.onload = function () {
             var remainDiv = document.createElement('div');
             remainDiv.textContent = '剩餘番茄鐘數：' + todo.remainTomato;
             remainDiv.setAttribute("class", "remain-tomato")
+
             // 維尼:為了使updateTodoDisplay能正常運作而加上的class
             var restartButton = document.createElement('button');
             restartButton.textContent = 'Restart';
             restartButton.addEventListener('click', function () {
                 // 重新啟動番茄鐘
-                div.className = "todoBox"
                 todo.remainTomato = todo.tomato;
-                clearInterval(timer);
-                resetTimer();
-                isTimerRunning = false;
                 updateTodoDisplay(todo, div);
             });
 
-            var startTimerButton = document.createElement('button');
-            startTimerButton.textContent = 'Start Timer';
-            startTimerButton.addEventListener('click', function () {
-                if(todo.remainTomato === 0){
+            var chooseButton = document.createElement('button');
+            chooseButton.textContent = 'Choose';
+            chooseButton.addEventListener('click', function () {
+                // 給結束一個事項還沒休息就急著想換事情的人
+                if(breakSection){
+                    alert("先休息一下吧！");
+                }
+                // 取消選擇
+                else if (div.className == "todoBoxSelected" && !isTimerRunning){
+                    chooseTodo = null;
+                    todoBoxDiv = null;
+                    div.className = "todoBox";
+                    updateTodoDisplay(todo, div);
+                }
+                // 沒有番茄還按開始的情況
+                else if(todo.remainTomato === 0){
                     alert("此事項已完成，若需再度計時，請restart!");
                     return;
+
                 }else{
                     console.log("還剩餘:" + todo.remainTomato);
-                }
-                if (!isTimerRunning){
-                    console.log("isTimerRunning?: ", isTimerRunning);
-                    // 開始計時器
+                    chooseTodo = todo;
+                    todoBoxDiv = div;
                     todosStateClean();
                     div.className = "todoBoxSelected";
-                    startTodoTimer(recount = false);
-                    startTodoCount(todo, div);
-                    isTimerRunning = true;
                     updateTodoDisplay(todo, div);
                 }
             });
@@ -66,15 +71,11 @@ window.onload = function () {
             div.appendChild(tomatoDiv);
             div.appendChild(remainDiv);
             div.appendChild(restartButton);
-            div.appendChild(startTimerButton);
+            div.appendChild(chooseButton);
             div.appendChild(deleteButton);
 
             infoBox.appendChild(div);
 
-            // 如果番茄鐘正在運行，則啟動計時器
-            if (isTimerRunning) {
-                startTodoCount(todo, div);
-            }
         });
     } else {
         var div = document.createElement('div');
@@ -91,45 +92,6 @@ window.onload = function () {
     });
     infoBox.appendChild(clearAllButton);
 };
-
-/**
- * 維尼:加上class對應的番茄數增長，將番茄鐘增長改為一次interval增加一次
-*/
-function startTodoCount(todo, div) {
-    interval = (setMinutes*60 + setSecond)*1000
-    if(interval == 0){
-        alert("番茄鐘時間錯誤，時間需大於0秒");
-        return;
-    }
-    clearInterval(todo.timer);
-    todo.remainTomato--; // 開始倒數，減少剩餘番茄鐘數
-    updateTodoDisplay(todo, div);
-
-    todo.timer = setInterval(function () {
-        console.log(todo.remainTomato);
-        if (todo.remainTomato === 0) {
-            clearInterval(todo.timer);
-            // 當番茄鐘倒數結束時，將 isTimerRunning 設置為 false
-            isTimerRunning = false;
-            // addToRecord();
-            div.className = "todoBoxDone";
-            resetTimer();
-            tomatoAnimation();
-            //alert("時間到！");
-            
-        } else {
-            todo.remainTomato--;
-            startTodoTimer(recount = true);
-        }
-        
-        updateTodoDisplay(todo, div);
-        addToRecordWithTag(todo.tag);
-        addToRecord();
-    }, interval);
-
-    startButton.disabled = true;
-    resetButton.disabled = false;
-}
 
 function updateTodoDisplay(todo, div) {
     var remainDiv = div.querySelector('.remain-tomato');
