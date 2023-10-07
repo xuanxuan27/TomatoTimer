@@ -25,7 +25,6 @@ window.onload = function () {
             var restartButton = document.createElement('button');
             restartButton.textContent = 'Restart';
             restartButton.addEventListener('click', function () {
-                // 重新啟動番茄鐘
                 todo.remainTomato = todo.tomato;
                 updateTodoDisplay(todo, div);
             });
@@ -33,8 +32,12 @@ window.onload = function () {
             var chooseButton = document.createElement('button');
             chooseButton.textContent = 'Choose';
             chooseButton.addEventListener('click', function () {
+                if (isTimerRunning){
+                    alert("開始計時後不能選擇事項");
+                }
+
                 // 給結束一個事項還沒休息就急著想換事情的人
-                if(breakSection){
+                else if(breakSection){
                     alert("先休息一下吧！");
                 }
                 // 取消選擇
