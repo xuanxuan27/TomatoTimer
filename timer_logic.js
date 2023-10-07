@@ -176,6 +176,7 @@ function resetTimer() {
     }
     // 計時未結束時使用者按 reset
     else {
+        isTimerRunning = false;
         if (breakSection == false) {
             title.textContent = "工作時間";
             minutes = setMinutes;/* 維尼:back to original interval */
