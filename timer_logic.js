@@ -14,7 +14,7 @@ const timerSound = document.getElementById('timerSound');
 const tomatoSound = document.getElementById('tomatoSound');
 const tomatoImage = document.getElementById("tomatoImage");
 const musicControlButton = document.getElementById('musicControl');
-const musicPlayer = new Audio('bgm.mp3'); 
+const musicPlayer = new Audio('bgm.mp3');
 
 // 設定初始計時器時間（25分鐘）
 let minutes = 25;
@@ -74,36 +74,37 @@ function updateDisplay() {
     secondsDisplay.textContent = seconds.toString().padStart(2, "0");
 }
 
-function addTimer(){
+function addTimer() {
     minutes += 25;/* */
     setMinutes += 25;
+    startButton.disabled = false;
     updateDisplay();
 }
 
-function minusTimer(){
-    if(minutes-25 >=0 ) {
+function minusTimer() {
+    if (minutes - 25 >= 0) {
         minutes -= 25;/* */
         setMinutes -= 25
-    }else {
+    } else {
         minutes = 0;
-        if(setMinutes < 25){
+        if (setMinutes < 25) {
             setMinutes = 0;
         }
     }
-    if(minutes==0 && seconds==0)
+    if (minutes == 0 && seconds == 0)
         startButton.disabled = true;
     updateDisplay();
 }
 
 // 開始計時器
 function startTimer() {
-    if (chooseTodo != null && chooseTodo.remainTomato == 0 && !breakSection){
+    if (chooseTodo != null && chooseTodo.remainTomato == 0 && !breakSection) {
         alert("此事項已完成，若需再度計時，請restart!");
     }
-    else{
+    else {
         timingTimer();
     }
-    
+
 }
 
 
@@ -128,7 +129,7 @@ function timingTimer() {
         }
         updateDisplay();
     }, 1000);
-    
+
     startButton.disabled = true;
     resetButton.disabled = false;
 }
@@ -138,26 +139,26 @@ function timingTimer() {
 function resetTimer() {
     clearInterval(timer);
     // 計時結束後的自動 reset
-    if(isTimerRunning==false){
-        if(breakSection == true){
+    if (isTimerRunning == false) {
+        if (breakSection == true) {
             title.textContent = "工作時間";
             pomodoroCount++; // 增加番茄計數
             minutes = setMinutes;/* 維尼:back to original interval */
             seconds = setSecond;
             breakSection = false;
         }
-        else{
+        else {
             title.textContent = "休息時間";
             addToRecord();
-            if (chooseTodo != null){
+            if (chooseTodo != null) {
                 chooseTodo.remainTomato--;
-                updateTodoDisplay(chooseTodo, todoBoxDiv);     
+                updateTodoDisplay(chooseTodo, todoBoxDiv);
                 addToRecordWithTag(chooseTodo.tag);
             }
-            else{
+            else {
                 addToRecordWithTag();
             }
-            
+
             if (pomodoroCount === 3) {
                 // 第四次休息，設置長休息時間
                 minutes = longRestTime;
@@ -174,14 +175,14 @@ function resetTimer() {
         }
     }
     // 計時未結束時使用者按 reset
-    else{
-        if(breakSection == false){
+    else {
+        if (breakSection == false) {
             title.textContent = "工作時間";
             minutes = setMinutes;/* 維尼:back to original interval */
             seconds = setSecond;
             breakSection = false;
         }
-        else{
+        else {
             title.textContent = "休息時間";
             if (pomodoroCount === 3) {
                 // 第四次休息，設置長休息時間
@@ -198,7 +199,7 @@ function resetTimer() {
             breakSection = true;
         }
     }
-    
+
     updateDisplay();
     startButton.disabled = false;
     resetButton.disabled = true;
