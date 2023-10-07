@@ -120,6 +120,12 @@ function clearAllTodos() {
 
 /*when click add new to do button then switch to the add scene*/
 function AddTodo_button() {
+    var todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+    if (todos.length >= 3) {
+        alert("已達到最大待辦事項數量，無法新增更多。");
+        return;
+    }
     window.location.href = "create_thing.html";
 }
 /**

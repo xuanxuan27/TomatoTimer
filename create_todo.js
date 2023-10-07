@@ -15,7 +15,7 @@ function getInputValue() {
     }
     
     // 檢查番茄鐘數是否為有效數字且大於0
-    if (!isNaN(tomato) && parseInt(tomato) > 0) {
+    if (!isNaN(tomato) && parseInt(tomato) > 0 && parseInt(tomato) <= 100) {
         var remainTomato = tomato;
         
         var todos = [];
@@ -31,9 +31,10 @@ function getInputValue() {
         todos.push(newTodo);
         localStorage.setItem('todos', JSON.stringify(todos));
         window.location.href = "TomatoTimer.html";
-    } else {
+    } 
+    else {
         // 显示警告
-        alert("番茄鐘數必須是大於0的數字。");
+        alert("番茄鐘數必須是大於0且不大於100的數字。");
     }
 }
 
