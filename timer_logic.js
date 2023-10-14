@@ -75,25 +75,56 @@ function updateDisplay() {
 }
 
 function addTimer() {
-    minutes += 25;/* */
-    setMinutes += 25;
-    startButton.disabled = false;
-    updateDisplay();
+    if(!isTimerRunning){
+        if(breakSection){
+            minutes += 5;/* */
+            setMinutes += 5;
+        }
+        else{
+            minutes += 25;/* */
+            setMinutes += 25;
+        }
+        
+        startButton.disabled = false;
+        updateDisplay();
+    }
+    else{
+        alert("請勿於計時期間修改時間");
+    }
 }
 
 function minusTimer() {
-    if (minutes - 25 >= 0) {
-        minutes -= 25;/* */
-        setMinutes -= 25
-    } else {
-        minutes = 0;
-        if (setMinutes < 25) {
-            setMinutes = 0;
+    if(!isTimerRunning){
+        if(breakSection){
+            if (minutes - 5 >= 0) {
+                minutes -= 5;/* */
+                setMinutes -= 5
+            } else {
+                minutes = 0;
+                if (setMinutes < 5) {
+                    setMinutes = 0;
+                }
+            }
         }
+        else{
+            if (minutes - 25 >= 0) {
+                minutes -= 25;/* */
+                setMinutes -= 25
+            } else {
+                minutes = 0;
+                if (setMinutes < 25) {
+                    setMinutes = 0;
+                }
+            }
+        }
+        
+        if (minutes == 0 && seconds == 0)
+            startButton.disabled = true;
+        updateDisplay();
     }
-    if (minutes == 0 && seconds == 0)
-        startButton.disabled = true;
-    updateDisplay();
+    else{
+        alert("請勿於計時期間修改時間");
+    }
 }
 
 // 開始計時器
@@ -163,13 +194,13 @@ function resetTimer() {
                 // 第四次休息，設置長休息時間
                 minutes = longRestTime;
                 seconds = setSecond;
-                // seconds = longRestTime; // 測試用
+                //seconds = longRestTime; // 測試用
                 pomodoroCount = 0; // 重置番茄計數
             } else {
                 // 其他情況，開始休息計時
                 minutes = restTime;
                 seconds = setSecond;
-                // seconds = restTime; // 測試用
+                //seconds = restTime; // 測試用
             }
             breakSection = true;
         }
