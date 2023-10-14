@@ -1,7 +1,11 @@
+var Todo_len;
+const Create_new_todo_button = document.getElementById('create_newTodo');
+Create_new_todo_button.addEventListener("click", AddTodo_button);
 window.onload = function () {
     var todos = JSON.parse(localStorage.getItem('todos'));
     var infoBox = document.getElementById('todoPanel');
-
+    Todo_len = todos.length;
+    console.log(Todo_len);
     // 遍歷數據
     if (todos && todos.length > 0) {
         todos.forEach(function (todo, index) {
@@ -32,27 +36,27 @@ window.onload = function () {
             var chooseButton = document.createElement('button');
             chooseButton.textContent = 'Choose';
             chooseButton.addEventListener('click', function () {
-                if (isTimerRunning){
+                if (isTimerRunning) {
                     alert("開始計時後不能選擇事項");
                 }
 
                 // 給結束一個事項還沒休息就急著想換事情的人
-                else if(breakSection){
+                else if (breakSection) {
                     alert("先休息一下吧！");
                 }
                 // 取消選擇
-                else if (div.className == "todoBoxSelected" && !isTimerRunning){
+                else if (div.className == "todoBoxSelected" && !isTimerRunning) {
                     chooseTodo = null;
                     todoBoxDiv = null;
                     div.className = "todoBox";
                     updateTodoDisplay(todo, div);
                 }
                 // 沒有番茄還按開始的情況
-                else if(todo.remainTomato === 0){
+                else if (todo.remainTomato === 0) {
                     alert("此事項已完成，若需再度計時，請restart!");
                     return;
 
-                }else{
+                } else {
                     console.log("還剩餘:" + todo.remainTomato);
                     chooseTodo = todo;
                     todoBoxDiv = div;
@@ -120,16 +124,22 @@ function clearAllTodos() {
 
 /*when click add new to do button then switch to the add scene*/
 function AddTodo_button() {
-    window.location.href = "create_thing.html";
+    if (Todo_len >= 30) {
+        alert("待辦事項數量已達上限");
+    }
+    else {
+        window.location.href = "create_thing.html";
+    }
+
 }
 /**
  * 維尼:為了產生顏色差別in defaule/ selectd/ done以做的clean state
  */
 function todosStateClean() {
-    var todoBoxSelected = document.getElementsByClassName("todoBoxSelected"); 
+    var todoBoxSelected = document.getElementsByClassName("todoBoxSelected");
     let selectedArray = Array.from(todoBoxSelected);
     console.log(selectedArray)
-    if(selectedArray.length != 0){
+    if (selectedArray.length != 0) {
         selectedArray.forEach(selected => {
             selected.className = "todoBox";
         });
