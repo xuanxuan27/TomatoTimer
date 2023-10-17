@@ -41,6 +41,7 @@ let isMusicPlaying = false; // music play on/off
 musicPlayer.volume = 0.3;
 let isTimerRunning = false;
 let breakSection = false;
+let startButtonDisabledFlag = false;
 
 
 // 添加事件監聽器
@@ -84,7 +85,7 @@ function addTimer() {
             minutes += 25;/* */
             setMinutes += 25;
         }
-
+        startButtonDisabledFlag = false;
         startButton.disabled = false;
         updateDisplay();
     }
@@ -121,7 +122,7 @@ function minusTimer() {
         }
 
         if (minutes == 0 && seconds == 0)
-            startButton.disabled = true;
+            startButtonDisabledFlag = true;
         updateDisplay();
     }
     else {
@@ -131,7 +132,10 @@ function minusTimer() {
 
 // 開始計時器
 function startTimer() {
-    if (chooseTodo != null && chooseTodo.remainTomato == 0 && !breakSection) {
+    if (startButtonDisabledFlag == true) {
+        alert("時間為 0 無法開始計時。");
+    }
+    else if (chooseTodo != null && chooseTodo.remainTomato == 0 && !breakSection) {
         alert("此事項已完成，若需再度計時，請restart!");
     }
     else {

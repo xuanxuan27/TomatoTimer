@@ -13,10 +13,6 @@ function getInputValue() {
         alert("請填寫所有字段。");
         return;
     }
-    if (name.length > 22) {
-        alert("名稱長度不得超過22字元。");
-        return;
-    }
     // 檢查番茄鐘數是否為有效數字且大於0
     if (!isNaN(tomato) && parseInt(tomato) > 0 && parseInt(tomato) <= 99) {
         var remainTomato = tomato;
