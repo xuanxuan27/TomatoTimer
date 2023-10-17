@@ -17,13 +17,13 @@ const musicControlButton = document.getElementById('musicControl');
 const musicPlayer = new Audio('bgm.mp3');
 
 // 設定初始計時器時間（25分鐘）
-let minutes = 25;
-let seconds = 0;
+let minutes = 0;
+let seconds = 5;
 let setMinutes = minutes;
 let setSecond = seconds;
 let timer;
 
-let restTime = 5;  // 休息時間（以分鐘為單位）
+let restTime = 0;  // 休息時間（以分鐘為單位）
 let longRestTime = 15; // 第四次休息的長休息時間（以分鐘為單位）
 let pomodoroCount = 0; // 番茄數量計數
 
@@ -75,27 +75,27 @@ function updateDisplay() {
 }
 
 function addTimer() {
-    if(!isTimerRunning){
-        if(breakSection){
+    if (!isTimerRunning) {
+        if (breakSection) {
             minutes += 5;/* */
             setMinutes += 5;
         }
-        else{
+        else {
             minutes += 25;/* */
             setMinutes += 25;
         }
-        
+
         startButton.disabled = false;
         updateDisplay();
     }
-    else{
+    else {
         alert("請勿於計時期間修改時間");
     }
 }
 
 function minusTimer() {
-    if(!isTimerRunning){
-        if(breakSection){
+    if (!isTimerRunning) {
+        if (breakSection) {
             if (minutes - 5 >= 0) {
                 minutes -= 5;/* */
                 setMinutes -= 5
@@ -106,23 +106,25 @@ function minusTimer() {
                 }
             }
         }
-        else{
+        else {
             if (minutes - 25 >= 0) {
                 minutes -= 25;/* */
                 setMinutes -= 25
             } else {
                 minutes = 0;
+                seconds = 0;
                 if (setMinutes < 25) {
                     setMinutes = 0;
                 }
             }
+
         }
-        
+
         if (minutes == 0 && seconds == 0)
             startButton.disabled = true;
         updateDisplay();
     }
-    else{
+    else {
         alert("請勿於計時期間修改時間");
     }
 }
