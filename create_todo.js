@@ -33,12 +33,9 @@ function getInputValue() {
         todos.push(newTodo);
         localStorage.setItem('todos', JSON.stringify(todos));
         window.location.href = "TomatoTimer.html";
-    } else if (parseInt(tomato) <= 0) {
+    } else if (parseInt(tomato) <= 0 || parseInt(tomato) > 99) {
         // 显示警告
         alert("番茄鐘數必須是大於0且不大於100的數字。");
-    }
-    else {
-        alert("番茄鐘數必須是小於99的數字。");
     }
 }
 
