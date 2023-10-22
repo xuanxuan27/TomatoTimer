@@ -49,7 +49,6 @@ startButton.addEventListener("click", startTimer);
 resetButton.addEventListener("click", resetTimer);
 addTomatoButton.addEventListener("click", addTimer);
 minusTomatoButton.addEventListener("click", minusTimer);
-
 musicControlButton.addEventListener('click', () => {
     if (isMusicPlaying) {
         musicPlayer.pause(); // 停止音樂播放
@@ -67,13 +66,23 @@ musicControlButton.addEventListener('click', () => {
 function addToRecord() {
     recordCount++;
     tomatoNumDisplay.textContent = recordCount;
+    if (chooseTodo != null) {
+        chooseTodo.remainTomato--;
+        updateTodoDisplay(chooseTodo, todoBoxDiv);
+        addToRecordWithTag(chooseTodo.tag);
+    }
+    else {
+        addToRecordWithTag();
+    }
 }
+
 
 // 更新計時器顯示
 function updateDisplay() {
     minutesDisplay.textContent = minutes.toString().padStart(2, "0");
     secondsDisplay.textContent = seconds.toString().padStart(2, "0");
 }
+
 
 function addTimer() {
     if (!isTimerRunning) {
@@ -93,6 +102,7 @@ function addTimer() {
         alert("請勿於計時期間修改時間");
     }
 }
+
 
 function minusTimer() {
     if (!isTimerRunning) {
@@ -151,12 +161,10 @@ function timingTimer() {
 
     timer = setInterval(function () {
         if (minutes === 0 && seconds === 0) {
-
             console.log("Interval cleaned");
             clearInterval(timer);
             isTimerRunning = false;
             resetTimer();
-            /*playTimerSound();*/ // 計時器到達0，播放提示音
             tomatoAnimation();
         } else if (seconds === 0) {
             minutes--;
@@ -178,63 +186,22 @@ function resetTimer() {
     // 計時結束後的自動 reset
     if (isTimerRunning == false) {
         if (breakSection == true) {
-            title.textContent = "工作時間";
             pomodoroCount++; // 增加番茄計數
-            minutes = setMinutes;/* 維尼:back to original interval */
-            seconds = setSecond;
-            breakSection = false;
+            resetWorkTimer();
         }
         else {
-            title.textContent = "休息時間";
             addToRecord();
-            if (chooseTodo != null) {
-                chooseTodo.remainTomato--;
-                updateTodoDisplay(chooseTodo, todoBoxDiv);
-                addToRecordWithTag(chooseTodo.tag);
-            }
-            else {
-                addToRecordWithTag();
-            }
-
-            if (pomodoroCount === 3) {
-                // 第四次休息，設置長休息時間
-                minutes = longRestTime;
-                seconds = setSecond;
-                //seconds = longRestTime; // 測試用
-                pomodoroCount = 0; // 重置番茄計數
-            } else {
-                // 其他情況，開始休息計時
-                minutes = restTime;
-                seconds = setSecond;
-                //seconds = restTime; // 測試用
-            }
-            breakSection = true;
+            resetBreakTimer();
         }
     }
     // 計時未結束時使用者按 reset
     else {
         isTimerRunning = false;
         if (breakSection == false) {
-            title.textContent = "工作時間";
-            minutes = setMinutes;/* 維尼:back to original interval */
-            seconds = setSecond;
-            breakSection = false;
+            resetWorkTimer();
         }
         else {
-            title.textContent = "休息時間";
-            if (pomodoroCount === 3) {
-                // 第四次休息，設置長休息時間
-                minutes = longRestTime;
-                seconds = setSecond;
-                // seconds = longRestTime; // 測試用
-                pomodoroCount = 0; // 重置番茄計數
-            } else {
-                // 其他情況，開始休息計時
-                minutes = restTime;
-                seconds = setSecond;
-                // seconds = restTime; // 測試用
-            }
-            breakSection = true;
+            resetBreakTimer();
         }
     }
 
@@ -243,10 +210,6 @@ function resetTimer() {
     resetButton.disabled = true;
 }
 
-
-/*function playTimerSound() {
-    timerSound.play();
-}*/
 
 // 蕃茄爆炸動畫
 function tomatoAnimation() {
@@ -258,26 +221,34 @@ function tomatoAnimation() {
     tomatoSound.play();
 }
 
-function updateTimer() {
-    if (minutes === 0 && seconds === 0) {
-        if (isMusicPlaying) {
-            musicPlayer.pause(); // 停止音樂播放
-            isMusicPlaying = false;
-        }
-        // 其他計時器結束的操作...
-    } else {
-        // 更新分和秒
-        // 其他計時器運行的操作...
 
-        // 檢查音樂播放狀態並做出相應的處理
-        if (isMusicPlaying) {
-            // 如果音樂正在播放，可以執行相關操作
-        }
-    }
+function resetWorkTimer(){
+    title.textContent = "工作時間";
+    minutes = setMinutes;/* 維尼:back to original interval */
+    seconds = setSecond;
+    breakSection = false;
 }
+
+
+function resetBreakTimer(){
+    title.textContent = "休息時間";
+    if (pomodoroCount === 3) {
+        // 第四次休息，設置長休息時間
+        minutes = longRestTime;
+        seconds = setSecond;
+        pomodoroCount = 0; // 重置番茄計數
+    } else {
+        // 其他情況，開始休息計時
+        minutes = restTime;
+        seconds = setSecond;
+    }
+    breakSection = true;
+}
+
 
 
 
 // 初始化計時器顯示
 updateDisplay();
 resetButton.disabled = true;
+
