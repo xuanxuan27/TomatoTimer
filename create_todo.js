@@ -13,9 +13,16 @@ function getInputValue() {
         alert("請填寫所有字段。");
         return;
     }
+
+    //處理tomato是小數的情況
+    if (parseFloat(tomato) % 1 !== 0) {
+        alert("番茄鐘數必須是整數。");
+    }
+
     // 檢查番茄鐘數是否為有效數字且大於0
-    if (!isNaN(tomato) && parseInt(tomato) > 0 && parseInt(tomato) <= 99) {
-        var remainTomato = tomato;
+    else if (!isNaN(tomato) && parseInt(tomato) > 0 && parseInt(tomato) <= 99) {
+        var tomatoNumInt = parseFloat(tomato).toFixed(0);
+        var remainTomato = tomatoNumInt;
         var todos = [];
         if (localStorage.getItem('todos') !== null) {
             todos = JSON.parse(localStorage.getItem('todos'));
@@ -23,16 +30,18 @@ function getInputValue() {
         var newTodo = {
             name: name,
             tag: tag,
-            tomato: tomato,
+            tomato: tomatoNumInt,
             remainTomato: remainTomato
         };
         todos.push(newTodo);
         localStorage.setItem('todos', JSON.stringify(todos));
         window.location.href = "TomatoTimer.html";
-    } else if (parseInt(tomato) <= 0 || parseInt(tomato) > 99) {
-        // 显示警告
+    }
+    else if (parseInt(tomato) <= 0 || parseInt(tomato) > 99) {
+        // 顯示警告
         alert("番茄鐘數必須是大於0且不大於100的數字。");
     }
+
 }
 
 
