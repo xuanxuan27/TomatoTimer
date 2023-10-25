@@ -20,7 +20,7 @@ function getInputValue() {
     }
 
     // 檢查番茄鐘數是否為有效數字且大於0
-    else if (!isNaN(tomato) && parseInt(tomato) > 0 && parseInt(tomato) <= 99) {
+    else if (!isNaN(tomato) && parseInt(tomato) > 0 && parseInt(tomato) <= 100) {
         var tomatoNumInt = parseFloat(tomato).toFixed(0);
         var remainTomato = tomatoNumInt;
         var todos = [];
